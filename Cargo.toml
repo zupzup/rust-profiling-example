@@ -1,0 +1,15 @@
+[package]
+name = "rust-profiling-example"
+version = "0.1.0"
+authors = ["Mario Zupan <mario@zupzup.org>"]
+edition = "2018"
+
+[dependencies]
+futures = "0.3"
+tokio = { version = "1.1", features = ["macros", "time", "rt-multi-thread", "sync"] }
+warp = "0.3"
+reqwest = "0.11"
+
+
+[profile.release]
+debug = true
