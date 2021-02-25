@@ -39,6 +39,7 @@ pub async fn cpu_handler(clients: FasterClients) -> WebResult<impl Reply> {
         .iter()
         .map(|(_, client)| client.user_id.to_string())
         .collect();
+    drop(clients_lock);
 
     let mut result = 0;
     for i in 0..1000000 {
@@ -57,6 +58,7 @@ pub async fn cpu_handler_alloc(clients: FasterClients) -> WebResult<impl Reply> 
         .iter()
         .map(|(_, client)| client.user_id.to_string())
         .collect();
+    drop(clients_lock);
 
     let mut result = 0;
     for i in 0..1000000 {
