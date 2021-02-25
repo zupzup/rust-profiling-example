@@ -6,4 +6,8 @@ class Basic(HttpUser):
 
     @task
     def read(self):
-        self.client.get("/read")
+        self.client.get("/cpu")
+
+    # @task
+    # def read(self):
+    #     self.client.get("/cpualloc")

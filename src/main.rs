@@ -29,16 +29,20 @@ async fn main() {
         .and(with_clients(clients.clone()))
         .and_then(handler::read_handler);
 
-    let faster_route = warp::path!("faster")
-        .and(with_clients(clients.clone()))
-        .and_then(handler::faster_read_handler);
-
     let fast_route = warp::path!("fast")
         .and(with_faster_clients(faster_clients.clone()))
         .and_then(handler::fast_read_handler);
 
+    let cpu_route = warp::path!("cpu")
+        .and(with_faster_clients(faster_clients.clone()))
+        .and_then(handler::cpu_handler);
+
+    let cpu_route_alloc = warp::path!("cpualloc")
+        .and(with_faster_clients(faster_clients.clone()))
+        .and_then(handler::cpu_handler_alloc);
+
     println!("Started server at localhost:8080");
-    warp::serve(read_route.or(faster_route).or(fast_route))
+    warp::serve(read_route.or(fast_route).or(cpu_route).or(cpu_route_alloc))
         .run(([0, 0, 0, 0], 8080))
         .await;
 }
