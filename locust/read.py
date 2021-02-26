@@ -1,4 +1,3 @@
-import time
 from locust import HttpUser, task, between
 
 class Basic(HttpUser):
